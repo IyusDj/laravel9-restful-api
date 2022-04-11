@@ -48,4 +48,27 @@ class ProductController extends Controller
         return new ProductResource(true, 'Show Data Product By Id!', $product);
     }
 
+    public function update(Request $request, Product $product)
+    {
+        // Define validation rules
+        $validator = Validator::make($request->all(), [
+            'name'      => 'required',
+            'price'     => 'required',
+        ]);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        // Update data
+        $product->update([
+            'name'      => $request->name,
+            'price'     => $request->price,
+        ]);
+        
+        // Return response
+        return new ProductResource(true, 'Data Product Success Changed!', $product);
+    }
+
 }
