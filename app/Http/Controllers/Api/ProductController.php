@@ -13,7 +13,7 @@ class ProductController extends Controller
     public function index()
     {
         // Get products
-        $product = Product::latest()->paginate(4);
+        $product = Product::latest()->paginate(3);
 
         // Return collection of product as a resource
         return new ProductResource(true, 'List Data Product', $product);
@@ -41,4 +41,11 @@ class ProductController extends Controller
         //return response
         return new ProductResource(true, ' Success Add Data Product!', $product);
     }
+
+    public function show(Product $product)
+    {
+        // Return single product as a resource
+        return new ProductResource(true, 'Show Data Product By Id!', $product);
+    }
+
 }
