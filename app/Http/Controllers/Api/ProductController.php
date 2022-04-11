@@ -71,4 +71,12 @@ class ProductController extends Controller
         return new ProductResource(true, 'Data Product Success Changed!', $product);
     }
 
+    public function destroy(Product $product)
+    {
+        // Delete product
+        $product->delete();
+
+        // Return response
+        return new ProductResource(true, 'Data Product Success Deleted!', null);
+    }
 }
